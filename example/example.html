@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<title>DOMViewCollection.js Example</title>
+		<link rel="stylesheet" href="example.css">
+	</head>
+	<body>
+		<main>
+			<h1>DOMViewCollection.js Example</h1>
+			<section>
+				<table cellpadding="0" cellspacing="0">
+					<tbody class="rows">
+					</tbody>
+				</table>
+				<input type="button" value="Add Row" class="add-row">
+				<input type="button" value="Clear Rows" class="clear-rows">
+				<input type="button" value="Clear Log" class="clear-log">
+			</section>
+			<section class="log">
+			</section>
+		</main>
+		<script type="text/template" id="rowTemplate">
+			<tr>
+				<td>Hello, world!</td>
+				<td><input type="button" value="Remove Row" class="remove-row"></td>
+			</tr>
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="domview.js"></script>
+		<script src="../domviewcollection.js"></script>
+		<script src="example.js"></script>
+	</body>
+</html>
