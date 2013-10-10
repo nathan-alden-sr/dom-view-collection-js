@@ -1,4 +1,4 @@
-// DOMViewCollection.js 0.9.0
+// DOMViewCollection.js 0.9.1
 
 // Created by Nathan Alden, Sr.
 // http://projects.nathanalden.com
@@ -15,6 +15,9 @@
 			get: function () {
 				return elements.slice(0);
 			},
+			getMapped: function () {
+				return $(this.get()).map(function () { return this.toArray(); });
+			},
 			count: function () {
 				return elements.length;
 			},
@@ -22,16 +25,16 @@
 				if (index < 0 || index > elements.length) {
 					return undefined;
 				}
-			
+
 				var filling = elements.length === 0;
-				
+
 				elements.splice(index, 0, element);
-				
+
 				this.options.added.call(this, index, element);
 				if (filling) {
 					this.options.filled.call(this, elements.length);
 				}
-				
+
 				return element;
 			},
 			add: function (element) {
@@ -49,15 +52,15 @@
 				if (index < 0 || index >= elements.length) {
 					return undefined;
 				}
-				
+
 				var emptying = elements.length === 1;
 				var removedElement = elements.splice(index, 1);
-					
+
 				this.options.removed.call(this, index, removedElement[0], elements.length);
 				if (emptying) {
 					this.options.emptied.call(this);
 				}
-				
+
 				return removedElement;
 			},
 			remove: function (element) {
@@ -74,24 +77,24 @@
 			clear: function () {
 				var emptying = elements.length > 0;
 				var removedElements = this.get();
-				
+
 				elements.length = 0;
-				
+
 				this.options.cleared.call(this);
 				if (emptying) {
 					this.options.emptied.call(this);
 				}
-				
+
 				return removedElements;
 			},
 			options: options
 		};
-		
+
 		options.init.call(collection);
-		
+
 		return collection;
 	};
-	
+
 	window.DomViewCollection.defaults = {
 		init: $.noop,
 		added: $.noop,
